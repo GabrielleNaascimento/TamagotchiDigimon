@@ -27,6 +27,8 @@ public class DigimonTela  extends JFrame {
         JLabel peso = new JLabel("Peso: " + guilmon.getPeso());
         JLabel idade = new JLabel("Idade: " + guilmon.getIdade());
         JLabel banheiro;
+        JLabel aviso = new JLabel("");
+        aviso.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         if (guilmon.getBanheiro()) {
             banheiro = new JLabel("Banheiro: Precisa");
@@ -60,20 +62,77 @@ public class DigimonTela  extends JFrame {
         painelBotoes.add(iraoBanheiro);
         painelBotoes.add(status);
         itenscentro.add(painelFoto);
+        itenscentro.add(aviso);
         itenscentro.add(painelStatus);
 
         //ACTION LISTENERS
 
         alimentar.addActionListener(e -> {
-            controller.alimentar(guilmon);
-            fome.setText("Fome : " + guilmon.getFome());
-            peso.setText("Peso " + guilmon.getPeso());
+
+            boolean conseguiu = controller.alimentar(guilmon);
+
+            if(conseguiu) {
+                boolean conseguiuPeso = controller.alimentarpeso(guilmon);
+
+                if(conseguiuPeso) {
+                    peso.setText("Peso: " + guilmon.getPeso());
+
+                    if(guilmon.getPeso() == 20) {
+                        aviso.setText("Seu Guilmon já está bem gordinho(a)!");
+                    }
+                }
+            }
+
+            if(conseguiu) {
+                fome.setText("Fome: " + guilmon.getFome());
+
+                if(guilmon.getFome() == 10) {
+                    aviso.setText("Seu Guilmon já está satisfeito!");
+                }
+
+            } else {
+                aviso.setText("Seu Guilmon já está satisfeito!");
+            }
         });
+
         passear.addActionListener(e -> {
-            controller.passear(guilmon);
-            felicidade.setText("Felicidade : " + guilmon.getFelicidade());
-            peso.setText("Peso " + guilmon.getPeso());
+
+            boolean conseguiu = controller.passear(guilmon);
+
+            if(conseguiu) {
+                boolean conseguiuPeso = controller.passearPeso(guilmon);
+
+                if(conseguiuPeso) {
+                    peso.setText("Peso: " + guilmon.getPeso());
+
+                    if(guilmon.getPeso() == 1) {
+                        aviso.setText("Seu Guilmon já está bem magro(a)!");
+                    }
+                }
+
+                boolean conseguiuFome = controller.passearFome(guilmon);
+
+                if(conseguiuFome) {
+                    fome.setText("Fome: " + guilmon.getFome());
+
+                    if(guilmon.getFome() == 1) {
+                        aviso.setText("Seu Guilmon já está com bastante fome!");
+                    }
+                }
+            }
+
+            if(conseguiu) {
+                felicidade.setText("Felicidade: " + guilmon.getFelicidade());
+
+                if(guilmon.getFelicidade() == 10) {
+                    aviso.setText("Seu Guilmon já está bem contente!");
+                }
+
+            } else {
+                aviso.setText("Seu Guilmon já está bem contente!");
+            }
         });
+
         iraoBanheiro.addActionListener(e -> {
             controller.irBanheiro(guilmon);
             if (guilmon.getBanheiro()){

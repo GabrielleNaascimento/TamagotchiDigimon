@@ -53,11 +53,20 @@ public class Digimon {
 
     public void aumentarFome(int valor) {
         fome += valor;
-        peso += 1;
+
+    }
+    public void aumentarPeso(int valor){
+        peso += valor;
+    }
+    public void diminuirPeso(int valor){
+        peso -= valor;
+    }
+
+    public void diminuirFome(int valor){
+        fome -= valor;
     }
     public void aumentarFelicidade(int valor) {
         felicidade += valor;
-        peso -= 1;
     }
 
 }

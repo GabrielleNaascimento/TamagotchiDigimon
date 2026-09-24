@@ -58,11 +58,70 @@ public class DigimonController {
 
     // aumentar
 
-    public void alimentar(Digimon digimon){
-        digimon.aumentarFome(2);
+    public boolean alimentar(Digimon digimon){
+        if(digimon.getFome() >= 10){
+            digimon.aumentarFome(0);
+            return false;
+        }
+        else if (digimon.getFome() + 2 >= 10) {
+            digimon.aumentarFome(1);
+            return true;
+        } else{
+            digimon.aumentarFome(2);
+            return true;
+        }
     }
-    public void passear(Digimon digimon){
-        digimon.aumentarFelicidade(2);
+
+    public boolean alimentarpeso(Digimon digimon){
+        if(digimon.getPeso() >= 20){
+            digimon.aumentarPeso(0);
+            return false;
+        }else if (digimon.getPeso() + 1 >= 20 ){
+            digimon.aumentarPeso(1);
+            return true;
+        }else{
+            digimon.aumentarPeso(1);
+            return true;
+        }
+    }
+    public boolean passear(Digimon digimon){
+        if(digimon.getFelicidade() >= 10){
+            digimon.aumentarFelicidade(0);
+            return false;
+        }
+        else if (digimon.getFelicidade() + 2 >= 10) {
+            digimon.aumentarFelicidade(1);
+            return true;
+        } else{
+            digimon.aumentarFelicidade(2);
+            return true;
+        }
+    }
+
+    public boolean passearPeso(Digimon digimon){
+        if(digimon.getPeso() <= 0){
+            digimon.diminuirPeso(0);
+            return false;
+        }else if (digimon.getPeso() - 1 >= 0 ){
+            digimon.diminuirPeso(1);
+            return true;
+        }else{
+            digimon.diminuirPeso(1);
+            return true;
+        }
+    }
+
+    public boolean passearFome(Digimon digimon){
+        if(digimon.getFome() <= 0){
+            digimon.diminuirFome(0);
+            return false;
+        }else if (digimon.getFome() - 1 >= 0 ){
+            digimon.diminuirFome(1);
+            return true;
+        }else{
+            digimon.diminuirFome(1);
+            return true;
+        }
     }
     public void irBanheiro(Digimon digimon){
         digimon.setBanheiro(false);
